@@ -30,7 +30,7 @@ public class Assign02_02 {
 	// equivalent to the above one
     }
 
-    public void main(String[] argv) {
+    public static void main(String[] argv) {
 	// Please write some testing code for your implementation of 'indexOf'
     }
 }
