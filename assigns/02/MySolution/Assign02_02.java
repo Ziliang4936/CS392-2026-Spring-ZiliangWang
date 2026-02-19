@@ -51,18 +51,18 @@ public class Assign02_02 {
             return mid;
         }
     }
-    public static void main(String[] argv) {
-	// Please write some testing code for your implementation of 'indexOf'
-        // Test code
-        Integer[] numbers = {10, 20, 30, 40, 50, 60, 70, 80, 90};
 
+    public static void main(String[] args) {
+        //Test code
+        Integer[] numbers = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        
         System.out.println("Testing indexOf:");
         System.out.println("indexOf(30) = " + indexOf(numbers, 30));  // 2
-        System.out.println("indexOf(10) = " + indexOf(numbers, 10));  // 0
+        System.out.println("indexOf(10) = " + indexOf(numbers, 10));  // 0    
         System.out.println("indexOf(90) = " + indexOf(numbers, 90));  // 8
         System.out.println("indexOf(25) = " + indexOf(numbers, 25));  // (not found)
-        System.out.println("indexOf(100) = " + indexOf(numbers, 100));
-
+        System.out.println("indexOf(100) = " + indexOf(numbers, 100)); 
+        
         // Test String array
         String[] words = {"apple", "banana", "cherry", "date", "elderberry"};
         System.out.println("\nTesting with strings:");
