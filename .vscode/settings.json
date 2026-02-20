@@ -2,6 +2,7 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
         "assigns/03/Code",
+        "assigns/04/Code",
         "libraries"
     ]
 }
