@@ -6,9 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
-/*
 import java.util.function.ToIntBiFunction;
-*/
 
 public class FnListSUtil {
 //
@@ -116,5 +114,31 @@ public class FnListSUtil {
 	);
 	System.out.print(")");
     }
-
+//
+    public static<T>
+	FnList<T>
+	insertSort(FnList<T> xs, ToIntBiFunction<T,T> cmp) {
+	if (nilq(xs)) {
+	    return xs;
+	} else {
+	    return
+	    insertSort_insert(insertSort(xs.tl(), cmp), xs.hd(), cmp);
+	}
+    }
+    private static<T>
+	FnList<T>
+	insertSort_insert(FnList<T> xs, T x0, ToIntBiFunction<T,T> cmp) {
+	if (nilq(xs)) {
+	    return cons(x0, xs);
+	} else {
+	    final T hd = xs.hd();
+	    final int sgn = cmp.applyAsInt(x0, hd);
+	    if (sgn <= 0) { // HX: for stableness
+		return cons(x0, xs); // [x0] is returned
+	    } else {
+		return cons(hd, insertSort_insert(xs.tl(), x0, cmp));
+	    }
+	}
+    }
+//
 } // end of [public class FnListSUtil{...}]
