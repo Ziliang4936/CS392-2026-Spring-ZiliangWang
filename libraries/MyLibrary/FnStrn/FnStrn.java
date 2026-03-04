@@ -2,12 +2,14 @@ package MyLibrary.FnStrn;
 
 public class FnStrn {
 
+    // String root;
     char root[];
 
     public FnStrn() {
 	root = null;
     }
     public FnStrn(char[] cs) {
+	// root = cs;
 	int ln = cs.length;
 	root = new char[ln];
 	for (int i = 0; i < ln; i += 1) {

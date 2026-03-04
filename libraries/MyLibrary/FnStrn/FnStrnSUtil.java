@@ -6,15 +6,21 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
+/*
+import java.util.function.ToIntBiFunction;
+*/
 
 public class FnStrnSUtil {
 //
+    // HX: This should be O(1)
     public static int length(FnStrn cs) {
 	return cs.length();
     }
+    // HX: This should be O(1)
     public static boolean nilq(FnStrn cs) {
 	return (cs.length() == 0);
     }
+    // HX: This should be O(1)
     public static boolean consq(FnStrn cs) {
 	return (cs.length() >= 1);
     }
@@ -23,6 +29,11 @@ public class FnStrnSUtil {
 	char res[];
 	int ln = cs.length();
 	res = new char[ln];
+/*
+        for (int i = 0; i < ln; i += 1) {
+	    res[i] = cs.getAt(ln-1-i);
+	}
+*/
 	iforitm(cs,
 	  (i, c1) -> { res[ln-1-i] = c1; }
 	);
