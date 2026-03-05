@@ -18,7 +18,11 @@ public class Assign05_01 {
     }
 //
     public static<T> FnList<T>
+
 	insertSort(FnList<T> xs, ToIntBiFunction<T,T> cmp) {
+	// HX-2026-02-26: Please implement this method// HX-2026-02-26: Please implement this method
+	// You can use while-loops but cannot make recursive
+	// calls.
 	// While-loop based insertion sort (no recursion).
 	FnList<T> sorted = new FnList<T>();
 	while (!xs.nilq()) {
