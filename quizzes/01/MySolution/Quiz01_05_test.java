@@ -7,9 +7,9 @@ abstract public class Quiz01_05_test {
     public static void main (String args[]) {
 	// Your testing code for Quiz01_05
 	//
-	// someSort delegates to Assign05_01.insertSort.
-	// someRevStableSort tags elements with indices, sorts with
-	// descending-index tie-breaking, then strips tags.
+	// someSort uses FnListSUtil.insertSort (stable, recursive).
+	// someRevStableSort = someSort(reverse(xs), cmp).
+	// reverse + stable sort = reverse-stable sort.
 
 	// --- Small reverse-stability check ---
 	// Input: [1^1, 2^1, 3^1, 2^2, 3^2, 1^2]
@@ -32,8 +32,8 @@ abstract public class Quiz01_05_test {
 	// --- Parity-sort of [0, 1, 2, ..., 999] ---
 	// Comparator: even(0) < odd(1).
 	// Reverse-stable: among equal-parity elements, original order is reversed.
-	//   evens reversed: 998, 996, ..., 2, 0   (indices 0..499)
-	//   odds  reversed: 999, 997, ..., 3, 1   (indices 500..999)
+	//   evens reversed: 998, 996, ..., 2, 0
+	//   odds  reversed: 999, 997, ..., 3, 1
 	ToIntBiFunction<Integer, Integer> parityCmp =
 	    (a, b) -> Integer.compare(a % 2, b % 2);
 
@@ -44,7 +44,6 @@ abstract public class Quiz01_05_test {
 
 	System.out.println("Length: " + result.length()); // expect 1000
 
-	// First 5 (evens reversed from 998)
 	System.out.print("First 5: ");
 	FnList<Integer> tmp = result;
 	for (int i = 0; i < 5; i++) {
@@ -52,14 +51,12 @@ abstract public class Quiz01_05_test {
 	}
 	System.out.println(); // expect 998 996 994 992 990
 
-	// Boundary between evens and odds
 	tmp = result;
 	for (int i = 0; i < 499; i++) tmp = tmp.tl();
 	System.out.println("result[499] = " + tmp.hd()); // expect 0
 	tmp = tmp.tl();
 	System.out.println("result[500] = " + tmp.hd()); // expect 999
 
-	// Last element
 	FnList<Integer> tmp2 = result;
 	for (int i = 0; i < 999; i++) tmp2 = tmp2.tl();
 	System.out.println("result[999] = " + tmp2.hd()); // expect 1

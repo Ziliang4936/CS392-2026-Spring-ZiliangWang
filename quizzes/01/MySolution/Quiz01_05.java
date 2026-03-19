@@ -22,11 +22,8 @@ abstract public class Quiz01_05 {
 	(FnList<T> xs, ToIntBiFunction<T,T> cmp) {
 	// HX-2025-10-15:
 	// This one is abstract, that is, not implemented
-	// Delegating to FnListSUtil.insertSort (our own insertion sort on FnList).
 	return FnListSUtil.insertSort(xs, cmp);
     }
-
-    @SuppressWarnings("unchecked")
     public static<T>
 	FnList<T> someRevStableSort
 	(FnList<T> xs, ToIntBiFunction<T,T> cmp) {
@@ -34,37 +31,11 @@ abstract public class Quiz01_05 {
 	// Please implement a reverse-stable sorting method
 	// based on someSort
 	//
-	// Tag each element with its original index, then sort
-	// with a tie-breaker that orders equal elements by
-	// descending index. This guarantees reverse-stability
-	// regardless of someSort's own stability properties.
-
-	// 1. Build tagged list: Object[]{element, index}
-	FnList<Object[]> tagged = new FnList<>();
-	FnList<T> cur = xs;
-	int idx = 0;
-	while (cur.consq()) {
-	    tagged = new FnList<>(new Object[]{cur.hd(), idx}, tagged);
-	    idx++;
-	    cur = cur.tl();
-	}
-	tagged = FnListSUtil.reverse(tagged);
-
-	// 2. Sort tagged list: primary key = cmp, tie-break = descending index
-	FnList<Object[]> sorted = someSort(tagged, (a, b) -> {
-	    int c = cmp.applyAsInt((T) a[0], (T) b[0]);
-	    if (c != 0) return c;
-	    return Integer.compare((int) b[1], (int) a[1]);
-	});
-
-	// 3. Strip tags
-	FnList<T> result = new FnList<>();
-	FnList<Object[]> cur2 = sorted;
-	while (cur2.consq()) {
-	    result = new FnList<>((T) cur2.hd()[0], result);
-	    cur2 = cur2.tl();
-	}
-	return FnListSUtil.reverse(result);
+	// Reverse the input first, then apply stable someSort.
+	// After reversal, equal elements appear in reversed original order;
+	// a stable someSort preserves that order => reverse-stable result.
+	// This works for any stable sorting function.
+	return someSort(FnListSUtil.reverse(xs), cmp);
     }
 }
 
