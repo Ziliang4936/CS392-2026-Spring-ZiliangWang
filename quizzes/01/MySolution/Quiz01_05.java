@@ -31,11 +31,37 @@ abstract public class Quiz01_05 {
 	// Please implement a reverse-stable sorting method
 	// based on someSort
 	//
-	// Reverse the input first, then apply stable someSort.
-	// After reversal, equal elements appear in reversed original order;
-	// a stable someSort preserves that order => reverse-stable result.
-	// This works for any stable sorting function.
-	return someSort(FnListSUtil.reverse(xs), cmp);
+	// Build tagged elements (value, originalIndex), then sort by:
+	// 1) cmp(value1, value2)
+	// 2) for ties, descending originalIndex
+	// This enforces reverse-stable order regardless of whether
+	// someSort itself is stable.
+	FnList<Object[]> tagged = new FnList<Object[]>();
+	FnList<T> ys = xs;
+	int idx = 0;
+	while (ys.consq()) {
+	    tagged = new FnList<Object[]>(new Object[]{ys.hd(), idx}, tagged);
+	    ys = ys.tl(); idx += 1;
+	}
+	tagged = FnListSUtil.reverse(tagged);
+	@SuppressWarnings("unchecked")
+	FnList<Object[]> sorted =
+	someSort
+	( tagged
+	, (a, b) -> {
+	      int c = cmp.applyAsInt((T)a[0], (T)b[0]);
+	      if (c != 0) return c;
+	      return Integer.compare((Integer)b[1], (Integer)a[1]);
+	  }
+	);
+	FnList<T> res = new FnList<T>();
+	while (sorted.consq()) {
+	    @SuppressWarnings("unchecked")
+	    T x0 = (T)sorted.hd()[0];
+	    res = new FnList<T>(x0, res);
+	    sorted = sorted.tl();
+	}
+	return FnListSUtil.reverse(res);
     }
 }
 
