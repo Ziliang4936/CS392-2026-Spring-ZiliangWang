@@ -1,9 +1,10 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
+        "quizzes/01/MySolution",
         "libraries",
         "assigns/04/Code",
         "assigns/03/Code",
-        "quizzes/01/MySolution"
+        "assigns/06/MySolution"
     ]
 }

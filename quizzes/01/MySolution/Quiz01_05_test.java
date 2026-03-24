@@ -23,9 +23,9 @@ abstract public class Quiz01_05_test {
     public static void main (String args[]) {
 	// Your testing code for Quiz01_05
 	//
-	// someSort uses FnListSUtil.insertSort for testing.
-	// someRevStableSort itself does not rely on stability of someSort:
-	// it tags elements with indices and uses descending-index tie-breaking.
+	// someSort uses FnListSUtil.insertSort (stable, recursive).
+	// someRevStableSort = someSort(reverse(xs), cmp).
+	// reverse + stable sort = reverse-stable sort.
 
 	// --- Small reverse-stability check ---
 	// Input: [1^1, 2^1, 3^1, 2^2, 3^2, 1^2]
