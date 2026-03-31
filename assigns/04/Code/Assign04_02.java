@@ -5,6 +5,7 @@ import MyLibrary.FnList.*;
 import MyLibrary.FnStrn.*;
 
 public class Assign04_02 {
+	//given a list of strings, concatenate them into a single string
     static FnStrn
 	FnList$FnStrn_concate(FnList<FnStrn> xs) {
 	int[] totalLen = {0};
