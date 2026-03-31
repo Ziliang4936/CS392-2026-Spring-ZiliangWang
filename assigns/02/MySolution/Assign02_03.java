@@ -1,54 +1,72 @@
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class Assign02_03 {
     public static boolean solve_3sum(Integer[] A) {
+	// Please give a soft quadratic time implementation
+	// that solves the 3-sum problem. The function call
+	// solve_3sum(A) returns true if and only if there exist
+	// distinct indices i, j, and k satisfying A[i]+A[j] = A[k].
+	// Why is your implementation soft O(n^2)?
+	//
+	// Complexity: Build a frequency map in O(n). Iterate over all
+	// O(n^2) pairs (i,j); for each pair do an O(1) expected-time
+	// HashMap lookup for the sum. Total: O(n^2) expected = soft O(n^2).
 
-        
-        int n = A.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int sum = A[i] + A[j];
-                int k = Arrays.binarySearch(A, sum);
-                if (k >= 0 && k != i && k != j) {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
+	int n = A.length;
+	if (n < 3) return false;
+
+	HashMap<Integer, Integer> freq = new HashMap<>();
+	for (int i = 0; i < n; i++) {
+	    freq.put(A[i], freq.getOrDefault(A[i], 0) + 1);
+	}
+
+	for (int i = 0; i < n; i++) {
+	    for (int j = i + 1; j < n; j++) {
+		int sum = A[i] + A[j];
+		int cnt = freq.getOrDefault(sum, 0);
+		if (A[i].equals(sum)) cnt--;
+		if (A[j].equals(sum)) cnt--;
+		if (cnt >= 1) return true;
+	    }
+	}
+	return false;
     }
-    
+
     public static void main(String[] args) {
-        // Please write some code here for testing solve_3sum
-        System.out.println("Testing solve_3sum:");
-        
-        Integer[] A = {1, 2, 3, 4, 5};
-        System.out.println("A = {1,2,3,4,5}: " + solve_3sum(A));  
-        // Expected: true (e.g., 1+2=3)
-        
-        Integer[] B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        System.out.println("B = {1,...,10}: " + solve_3sum(B));  
-        // Expected: true
-        
-        Integer[] C = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-        System.out.println("C = {1,...,20}: " + solve_3sum(C));  
-        // Expected: true
-        
-        Integer[] D = {0, 2, 4};
-        System.out.println("D = {0,2,4}: " + solve_3sum(D));  
-        // Expected: true (0+4=4 at indices 0,2,2 - wait, k=2 is used in j)
-        // Actually: 0+2=2 (indices 0,1,1) or 2+2=4 (indices 1,1,2) - hmm
-        
-        Integer[] E = {0};
-        System.out.println("E = {0}: " + solve_3sum(E));  
-        // Expected: false (not enough elements)
-        
-        Integer[] F = {1, 3, 7};
-        System.out.println("F = {1,3,7}: " + solve_3sum(F));  
-        // Expected: false (1+3=4, not in array)
-        
-        Integer[] G = {-5, -2, 0, 2, 5};
-        System.out.println("G = {-5,-2,0,2,5}: " + solve_3sum(G));  
-        // Expected: true (-5+5=0 at indices 0,4,2)
+	// Please write some code here for testing solve_3sum
+	System.out.println("Testing solve_3sum (O(n^2) HashMap):");
+
+	// 1+2=3 -> true
+	System.out.println("A = {1,2,3,4,5}: " + solve_3sum(new Integer[]{1, 2, 3, 4, 5}));   // true
+
+	// 1+2=3 -> true
+	System.out.println("B = {1,...,10}: " + solve_3sum(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})); // true
+
+	// 1+2=3 -> true
+	System.out.println("C = {1,...,20}: " + solve_3sum(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20})); // true
+
+	// 0+2=2 -> true (indices 0,1,1) but k must be distinct! 0+4=4 -> (0,2,2) k=j. 2+2=4 -> (1,2,2) k=j.
+	// 0+2=2: need k where A[k]=2, k!=0, k!=1. Only index 1 has 2, so no. 0+4=4: need k where A[k]=4, k!=0, k!=2. Index 2 has 4. So k=2, i=0, j=2... but j=2. So we need i<j. i=0, j=2: sum=4. k=2. But k cannot equal j! So no.
+	// 2+2=4: i=1, j=2, sum=4. k must have A[k]=4. Index 2 has 4. k=2. But k=j (2). So no.
+	// Actually for D={0,2,4}: distinct i,j,k. 0+2=2 -> need k s.t. A[k]=2, k!=0, k!=1. Index 1 has 2. So k=1. But then i=0, j=1, k=1. j=k! So invalid.
+	// 0+4=4 -> i=0, j=2, sum=4. k with A[k]=4, k!=0, k!=2. Only index 2 has 4. So k=2, but k=j. Invalid.
+	// 2+2=4 -> i=1, j=2, sum=4. k with A[k]=4. Index 2. k=2, j=2. Invalid.
+	// So D should be false!
+	System.out.println("D = {0,2,4}: " + solve_3sum(new Integer[]{0, 2, 4}));   // false (no distinct i,j,k)
+
+	// not enough elements
+	System.out.println("E = {0}: " + solve_3sum(new Integer[]{0}));   // false
+
+	// 1+3=4, not in array
+	System.out.println("F = {1,3,7}: " + solve_3sum(new Integer[]{1, 3, 7}));   // false
+
+	// -5+5=0 at indices 0,4,2 -> distinct
+	System.out.println("G = {-5,-2,0,2,5}: " + solve_3sum(new Integer[]{-5, -2, 0, 2, 5}));   // true
+
+	// 0+0=0: need k with A[k]=0, k!=0, k!=1. Index 2 has 0. So k=2, i=0, j=1. Valid.
+	System.out.println("H = {0,0,0}: " + solve_3sum(new Integer[]{0, 0, 0}));   // true
+
+	// 1+2=3 at indices 2,1,0 (unsorted - HashMap works on unsorted!)
+	System.out.println("I = {3,1,2} (unsorted): " + solve_3sum(new Integer[]{3, 1, 2}));   // true
     }
 }
