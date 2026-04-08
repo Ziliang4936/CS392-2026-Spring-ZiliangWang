@@ -1,6 +1,6 @@
-package Library.FnA1sz;
+package Library00.FnA1sz;
 
-import Library.FnList.*;
+import Library00.FnList.*;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -15,8 +15,6 @@ public class FnA1sz<T> {
 //    
     public final
     FnA1szSUtil SU = new FnA1szSUtil();
-    public final
-    FnA1szUtil<T> U0 = new FnA1szUtil<T>();
 //
     public FnA1sz(T[] xs) { root = xs; }
     public FnA1sz(FnList<T> xs) {
@@ -112,16 +110,5 @@ public class FnA1sz<T> {
 	}
 	return true;
     }
-//
-    public FnList<T>
-	listize() { return this.U0.listize(this); }
-    public FnList<T>
-	rlistize() { return this.U0.rlistize(this); }
-//
-    public FnA1sz<T>
-	mergeSort(ToIntBiFunction<T,T> cmp) { return this.U0.mergeSort(this, cmp); }
-//
-    public FnA1sz<T>
-	insertSort(ToIntBiFunction<T,T> cmp) { return this.U0.insertSort(this, cmp); }
 //
 } // end of [public class FnA1sz<T>{...}]

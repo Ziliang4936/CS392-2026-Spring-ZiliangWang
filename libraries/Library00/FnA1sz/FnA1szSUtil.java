@@ -1,6 +1,6 @@
-package Library.FnA1sz;
+package Library00.FnA1sz;
 
-import Library.FnList.*;
+import Library00.FnList.*;
 
 import java.util.function.Function;
 import java.util.function.Consumer;
@@ -18,13 +18,6 @@ public class FnA1szSUtil {
 	list$make(FnList<T> xs) {
 	return new FnA1sz<T>(xs);
     }
-    public static<T>
-	FnA1sz<Integer>
-	int1$make(int n0) {
-	return
-	list$make(FnListSUtil.int1$make(n0));
-    }
-//
     public static<T>
 	void System$out$print(FnA1sz<T> xs) {
     	System.out.print("FnA1sz(");
@@ -169,12 +162,6 @@ public class FnA1szSUtil {
 	<T extends Comparable<T>>
 	FnA1sz<T> mergeSort_array(FnA1sz<T> xs) {
 	return mergeSort_array(xs, (x1, x2) -> x1.compareTo(x2));
-    }
-//
-    public static
-	<T extends Comparable<T>>
-	int z2forcmp(FnA1sz<T> xs, FnA1sz<T> ys) {
-	return xs.U0.z2forcmp(xs, ys, (x0, y0) -> x0.compareTo(y0));
     }
 //
 } // end of [public class FnA1szSUtil{...}]
