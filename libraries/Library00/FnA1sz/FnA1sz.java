@@ -111,4 +111,21 @@ public class FnA1sz<T> {
 	return true;
     }
 //
+    public FnList<T> listize() {
+	FnList<T> res = new FnList<>();
+	int n = root.length;
+	for (int i = n - 1; i >= 0; i--) {
+	    res = new FnList<>(root[i], res);
+	}
+	return res;
+    }
+    public FnList<T> rlistize() {
+	FnList<T> res = new FnList<>();
+	int n = root.length;
+	for (int i = 0; i < n; i++) {
+	    res = new FnList<>(root[i], res);
+	}
+	return res;
+    }
+//
 } // end of [public class FnA1sz<T>{...}]
