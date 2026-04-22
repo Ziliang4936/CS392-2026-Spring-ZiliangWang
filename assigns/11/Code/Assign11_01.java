@@ -1,5 +1,9 @@
 //
 // HX-2026-04-21: 50 points
+//
+// Please see lectures/lecture-04-21 for an
+// example using DFirstEnumerate/BFirstEnumerate
+//
 // Some "hard" Sudoku puzzles can be
 // found here: https://sudoku.com/hard/.
 // You are asked to use DFirstEnumerate and BFirstEnumerate
