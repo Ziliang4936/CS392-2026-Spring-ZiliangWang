@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-import java.util.function.ToIntBiFunction;
 //
 // HX-2025-10-23:
 // typedef LnStrm<T> = Supplier<LnStcn<T>>
@@ -20,10 +19,6 @@ public class LnStrmSUtil {
 	return fxs.eval0();
     }
 //
-    public static<T>
-	LnStrm<T> nil0() {
-	return new LnStrm<T>(() -> new LnStcn<T>());
-    }
     public static<T>
 	LnStrm<T> cons0(T x0, LnStrm<T> fxs) {
 	return new LnStrm<T>(() -> new LnStcn<T>(x0, fxs));
@@ -106,57 +101,8 @@ public class LnStrmSUtil {
     }
 //
     public static<T>
-	LnStrm<T> m2erge0
-	(LnStrm<T> fxs, LnStrm<T> fys, ToIntBiFunction<T,T> cmp) {
-	return new LnStrm<T>(
-	  () -> {
-  	    LnStcn<T> cxs = fxs.eval0();
-	    if (cxs.nilq()) return fys.eval0();
-	    LnStcn<T> cys = fys.eval0();
-	    if (cys.nilq()) {
-              return new LnStcn<T>(cxs.hd(), cxs.tl());
-	    } else {
-	      return m2erge0_helper(
-	        cxs.hd(), cxs.tl(), cys.hd(), cys.tl(), cmp).eval0();
-	    }
-	  }
-	);
-    }
-    private static<T>
-    	LnStrm<T> m2erge0_helper
-	(T hdx, LnStrm<T> gxs, T hdy, LnStrm<T> gys, ToIntBiFunction<T,T> cmp) {
-	return new LnStrm<T>(
-	  () -> {
-	     T hd1 = hdx;
-	     T hd2 = hdy;
-	     LnStrm<T> fxs = gxs;
-	     LnStrm<T> fys = gys;
-	     if (hd1 == null) {
-	       LnStcn<T> cxs = fxs.eval0();
-	       if (cxs.nilq()) {
-	         return new LnStcn<T>(hd2, fys);
-	       } else {
-	         hd1 = cxs.hd(); fxs = cxs.tl();
-	       }
-	     }
-	     if (hd2 == null) {
-	       LnStcn<T> cys = fys.eval0();
-	       if (cys.nilq()) {
-	         return new LnStcn<T>(hd1, fxs);
-	       } else {
-	         hd2 = cys.hd(); fys = cys.tl();
-	       }
-	     }
-	     int sgn = cmp.applyAsInt(hd1, hd2);
-	     if (sgn <= 0) {
-	       T hd0 = hd1; hd1 = null;
-	       return new LnStcn<T>(hd0, m2erge0_helper(hd1, fxs, hd2, fys, cmp));
-	     } else {
-	       T hd0 = hd2; hd2 = null;
-	       return new LnStcn<T>(hd0, m2erge0_helper(hd1, fxs, hd2, fys, cmp));
-	     }
-	  }
-        );
+	FnList<T> toFnList0(LnStrm<T> fxs) {
+	return FnListSUtil.fwork$make((work) -> fxs.foritm0(work));
     }
 //
 } // end of [class LnStrmSUtil{...}]

@@ -10,8 +10,8 @@ public class MyQueueArrayTest {
 	itms.enque$exn(4);
 	itms.enque$exn(5);
 	itms.System$out$print(); System.out.println();
-    	System.out.print("MyQueueRev(");
-	itms.irforitm
+    	System.out.print("MyQueue(");
+	itms.iforitm
 	(
           (i, itm) ->
 	  {

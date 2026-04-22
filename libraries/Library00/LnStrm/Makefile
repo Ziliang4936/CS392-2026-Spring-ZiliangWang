@@ -1,5 +1,5 @@
 ########################(beg of [Makefile])########################
-Library00=./../..
+Library=./../..
 ###################################################################
 
 comp::
@@ -13,8 +13,16 @@ cleanall:: ; rm -f *.class
 
 ###################################################################
 
-comp:: ; javac -cp .:$(Library00) LnStrm.java
-comp:: ; javac -cp .:$(Library00) LnStcn.java
-comp:: ; javac -cp .:$(Library00) LnStrmSUtil.java
+comp:: ; javac -cp .:$(Library) LnStrm.java
+comp:: ; javac -cp .:$(Library) LnStcn.java
+comp:: ; javac -cp .:$(Library) LnStrmSUtil.java
+
+###################################################################
+
+test:: \
+LnStrmTest
+LnStrmTest: \
+LnStrmTest.class; java -cp .::$(Library) LnStrmTest
+LnStrmTest.class: LnStrmTest.java; javac -cp $(Library) LnStrmTest.java
 
 ########################(end of [Makefile])########################

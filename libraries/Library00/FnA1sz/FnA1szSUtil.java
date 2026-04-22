@@ -19,6 +19,13 @@ public class FnA1szSUtil {
 	return new FnA1sz<T>(xs);
     }
     public static<T>
+	FnA1sz<Integer>
+	int1$make(int n0) {
+	return
+	list$make(FnListSUtil.int1$make(n0));
+    }
+//
+    public static<T>
 	void System$out$print(FnA1sz<T> xs) {
     	System.out.print("FnA1sz(");
 	FnA1szSUtil.iforitm
@@ -119,49 +126,8 @@ public class FnA1szSUtil {
     }
 //
     public static<T>
-	FnList<T> listize(FnA1sz<T> xs) {
-	return xs.listize();
-    }
-    public static<T>
-	FnList<T> rlistize(FnA1sz<T> xs) {
-	return xs.rlistize();
-    }
-//
-    public static<T>
 	FnA1sz<T> toA1sz(FnA1sz<T> xs) {
 	return xs; // HX: This is just a no-op!
-    }
-//
-    public static<T> FnA1sz<T>
-	mergeSort
-	(FnA1sz<T> xs, ToIntBiFunction<T,T> cmp) {
-	return list$make(mergeSort_list(xs, cmp));
-    }
-    public static<T> FnList<T>
-	mergeSort_list
-	(FnA1sz<T> xs, ToIntBiFunction<T,T> cmp) {
-	return FnListSUtil.mergeSort(listize(xs), cmp);
-    }
-    public static<T> FnA1sz<T>
-	mergeSort_array
-	(FnA1sz<T> xs, ToIntBiFunction<T,T> cmp) {
-	return FnA1szSUtil.mergeSort(toA1sz(xs), cmp);
-    }
-//
-    public static
-	<T extends Comparable<T>>
-	FnA1sz<T> mergeSort(FnA1sz<T> xs) {
-	return mergeSort(xs, (x1, x2) -> x1.compareTo(x2));
-    }
-    public static
-	<T extends Comparable<T>>
-	FnList<T> mergeSort_list(FnA1sz<T> xs) {
-	return mergeSort_list(xs, (x1, x2) -> x1.compareTo(x2));
-    }
-    public static
-	<T extends Comparable<T>>
-	FnA1sz<T> mergeSort_array(FnA1sz<T> xs) {
-	return mergeSort_array(xs, (x1, x2) -> x1.compareTo(x2));
     }
 //
 } // end of [public class FnA1szSUtil{...}]

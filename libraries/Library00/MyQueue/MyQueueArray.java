@@ -77,25 +77,4 @@ public class MyQueueArray<T> extends MyQueueBase<T> {
 	}
 	return /*void*/ ;
     }
-
-    @Override
-    public void
-	rforitm(Consumer<? super T> work) {
-	int n = itms.length;
-	for (int i = 0; i < nitm; i += 1) {
-	    work.accept(itms[(last-1-i)%n]);
-	}
-	return /*void*/ ;
-    }
-
-    @Override
-    public void
-	irforitm(BiConsumer<Integer, ? super T> work) {
-	int n = itms.length;
-	for (int i = 0; i < nitm; i += 1) {
-	    work.accept(i, itms[(last-1-i)%n]);
-	}
-	return /*void*/ ;
-    }
-
 }
