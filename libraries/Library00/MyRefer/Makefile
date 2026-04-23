@@ -13,7 +13,11 @@ cleanall:: ; rm -f *.class
 
 ###################################################################
 
-comp:: ; javac -cp $(Library) FnA1sz.java
-comp:: ; javac -cp $(Library) FnA1szSUtil.java
+comp:: ; javac -cp $(Library) MyRefer.java
+comp:: ; javac -cp $(Library) MyReferNullExn.java
+
+###################################################################
+
+test::
 
 ########################(end of [Makefile])########################

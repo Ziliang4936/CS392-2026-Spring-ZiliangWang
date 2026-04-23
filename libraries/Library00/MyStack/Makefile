@@ -14,6 +14,7 @@ cleanall:: ; rm -f *.class
 ###################################################################
 
 comp:: ; javac -cp $(Library) MyStack.java
+comp:: ; javac -cp $(Library) MyStackBase.java
 comp:: ; javac -cp $(Library) MyStackList.java
 comp:: ; javac -cp $(Library) MyStackArray.java
 comp:: ; javac -cp $(Library) MyStackFullExn.java

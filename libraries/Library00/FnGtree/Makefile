@@ -13,7 +13,7 @@ cleanall:: ; rm -f *.class
 
 ###################################################################
 
-comp:: ; javac -cp $(Library) FnA1sz.java
-comp:: ; javac -cp $(Library) FnA1szSUtil.java
+comp:: ; javac -cp $(Library) FnGtree.java
+comp:: ; javac -cp $(Library) FnGtreeSUtil.java
 
 ########################(end of [Makefile])########################

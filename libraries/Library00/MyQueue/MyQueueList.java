@@ -1,12 +1,13 @@
-package Library00.MyStack;
+package Library00.MyQueue;
 
 import java.util.function.Consumer;
 import java.util.function.BiConsumer;
 
-public class MyStackList<T> extends MyStackBase<T> {
+public class MyQueueList<T> extends MyQueueBase<T> {
 
     int nitm = -1;
-    Node itms = null;
+    Node frst = null;
+    Node last = null;
 
     private class Node {
         private T item;
@@ -18,8 +19,8 @@ public class MyStackList<T> extends MyStackBase<T> {
         }
     }
 
-    public MyStackList() {
-	nitm = 0; itms = null;
+    public MyQueueList() {
+	nitm = 0; frst = null; last = null;
     }
 
     @Override
@@ -34,25 +35,33 @@ public class MyStackList<T> extends MyStackBase<T> {
 
     @Override
     public T top$raw() {
-	return itms.item;
+	return frst.item;
     }
 
     @Override
-    public T pop$raw() {
-	T itm = itms.item;
-	itms = itms.next;
+    public T deque$raw() {
+	T itm = frst.item;
+	frst = frst.next;
+	if (frst == null) last = null;
 	nitm -= 1; return itm;
     }
 
     @Override
-    public void push$raw(T itm) {
-	itms = new Node(itm, itms);
+    public void enque$raw(T itm) {
+	if (last == null) {
+	    last = new Node(itm, null);
+	    frst = last;
+	} else {
+	    last.next = new Node(itm, null);
+	    last = last.next;
+	}
 	nitm += 1; return;
     }
 
     @Override
-    public void foritm(Consumer<? super T> work) {
-	Node xs = itms;
+    public void
+	foritm(Consumer<? super T> work) {
+	Node xs = frst;
 	while (xs != null) {
 	    work.accept(xs.item); xs = xs.next;
 	}
@@ -62,7 +71,7 @@ public class MyStackList<T> extends MyStackBase<T> {
     public void
 	iforitm(BiConsumer<Integer, ? super T> work) {
 	int i = 0;
-	Node xs = itms;
+	Node xs = frst;
 	while (xs != null) {
 	    work.accept(i, xs.item); i += 1; xs = xs.next;
 	}
