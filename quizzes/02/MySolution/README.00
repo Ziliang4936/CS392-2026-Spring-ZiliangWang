@@ -128,7 +128,44 @@ Strategy for genAVLBST and the answer to "what is this height?":
 Quiz02_05:
 30 points plus up to 20 bonus points
 (isRBT and genRedBlackBST)
-Status: Not chosen (Quiz02_04 was chosen).
+Status: Solved with testing (single-pass implementation, eligible
+for the bonus). Provided as an additional attempt; per the
+quiz instructions Quiz02_04 is my officially chosen submission.
+
+Strategy for isRBT:
+  A single post-order traversal returns the black-height of each
+  subtree (number of black nodes on every root-to-NIL path,
+  counting NILs as black and not counting the node itself), or
+  -1 if any RBT invariant is violated. The invariants checked:
+    - the root is black,
+    - no red node has a red child,
+    - both subtrees of every node have the same black-height.
+  Each node is visited exactly once -> linear time, eligible
+  for the bonus.
+
+Strategy for genRedBLackBST and the answer to "what is this
+black-height?":
+  An RBT with black-height b can hold at most 4^b - 1 nodes
+  (achieved when red and black layers strictly alternate, with a
+  black root, since each black "unit" can carry one red layer
+  beneath it that doubles the layer count). Therefore the smallest
+  black-height that can hold N nodes is the smallest b with
+  4^b - 1 >= N. With N = 1_000_000:
+       4^9  - 1 = 262_143    < 1_000_000
+       4^10 - 1 = 1_048_575 >= 1_000_000
+  so the minimum achievable black-height is **b = 10**.
+
+  genRedBLackBST builds the corresponding tree:
+    - depths 0..18 form a perfect binary tree with 524287 nodes;
+      the colour of a node at depth d is BLACK if d is even, RED
+      if d is odd, giving 10 black layers;
+    - depth 19 holds the remaining 475713 RED nodes, packed
+      leftmost; their parents at depth 18 are black (so the
+      red-red invariant is fine) and their children are NIL.
+  Every root-to-NIL path traverses exactly the 10 black nodes at
+  depths 0,2,...,18 plus the final NIL, giving a uniform black
+  height of 10. Keys 0..999999 are assigned by an in-order walk
+  so the result is also a BST.
 
 ############################################################
 
