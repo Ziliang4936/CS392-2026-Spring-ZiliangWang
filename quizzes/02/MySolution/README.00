@@ -1,0 +1,167 @@
+############################################################
+
+Quiz02_00: 20 points
+Status: Solved with testing
+Strategy:
+  Imported every package under MyLibrary that I implemented and
+  created an instance of each (top-level) class:
+    FnList, FnListSUtil, FnA1sz, FnA1szSUtil,
+    FnStrn, FnStrnSUtil,
+    MyStackList, MyStackArray, MyStackEmptyExn, MyStackFullExn,
+    MyQueueArray, MyQueueEmptyExn, MyQueueFullExn.
+  (MyStack and MyQueue are package-private interfaces, and
+   MyStackBase / MyQueueBase are abstract; they cannot be
+   instantiated directly, but they are exercised through their
+   concrete subclasses MyStackList/MyStackArray and MyQueueArray.)
+  The main method also calls a method on each instance to show
+  it is a real, functional object.
+
+############################################################
+
+Quiz02_01: 50 points
+(FnA1szLongestMonoSubsequence)
+Status: Solved with testing
+Strategy:
+  Standard quadratic-time dynamic programming, going right-to-left.
+  Let L[i] be the length of the longest non-decreasing subsequence
+  starting at index i, and let nxt[i] be the smallest index j > i
+  with xs[j] >= xs[i] and L[j] = L[i] - 1 (i.e. the leftmost choice
+  that still attains the maximum length).
+  Computing L and nxt is O(n^2) because the inner loop scans every
+  j > i. The answer is reconstructed by starting at the smallest
+  index s with L[s] = max(L) and walking the nxt chain; choosing
+  the leftmost start and the leftmost next at every step gives the
+  lexicographically smallest sequence of indices among all longest
+  non-decreasing subsequences, which matches the spec ("longest
+  leftmost ascending"). Total time: O(n^2).
+
+############################################################
+
+Quiz02_02: 50 points
+(sort1000WithNoRecursion)
+Status: Solved with testing
+Strategy:
+  Plain iterative insertion sort with two nested loops and no
+  recursion. For each i = 1..n-1 we shift larger predecessors one
+  slot to the right and drop the saved key into the gap. On a
+  "nearly sorted" sequence (every element at most a constant
+  distance from its sorted position) the inner shift loop only
+  does O(1) work per pass, so the entire sort runs in O(n) time;
+  this scales comfortably to N = 10^6 (test runs in tens of ms).
+
+############################################################
+
+Quiz02_03: 50 points
+(GameOf24_dfs_solve and GameOf24_bfs_solve)
+Status: Solved with testing
+Strategy:
+  The state of an in-progress Game-of-24 game is the list of
+  Terms still on the table. Initially this list contains the four
+  TermInts. A "move" combines any two terms in the list with one
+  of {+, -, *, /} into a single TermOpr that takes their place,
+  shrinking the list by one. After three moves exactly one term
+  remains; the game is solved iff that term evaluates to 24.
+
+  I model the search space as an FnGtree<FnList<Term>>:
+    - the value() of a node is the current list of terms;
+    - the children() of a node is the list of all states reachable
+      in exactly one move (every ordered pair of operands times
+      every operator).
+  GameOf24_dfs_solve calls FnGtreeSUtil.DFirstEnumerate(root) and
+  GameOf24_bfs_solve calls FnGtreeSUtil.BFirstEnumerate(root).
+  Both return the same set of finished games as a stream of
+  FnList<Term>; I then keep only those of length 1 whose single
+  term evaluates to 24 and map them to that term, producing the
+  required LnStrm<Term>.
+
+############################################################
+
+Please choose only ONE from Quiz02_04 and Quiz02_05.
+If unspecified, I assume by default that Quiz02_04 is
+chosen.
+
+I CHOSE Quiz02_04.
+
+############################################################
+
+Quiz02_04:
+30 points plus up to 20 bonus points
+(isAVL and genAVLBST)
+Status: Solved with testing (single-pass implementation, eligible
+for the bonus)
+
+Strategy for isAVL:
+  A single post-order traversal computes and returns the height of
+  each subtree, and returns -1 to signal "not an AVL". Each node is
+  visited exactly once, so the algorithm is linear time and only
+  needs O(h) stack space, qualifying for the bonus.
+
+Strategy for genAVLBST and the answer to "what is this height?":
+  Let f(h) be the minimum number of nodes any AVL tree of height h
+  can contain (Fibonacci-tree counts):
+    f(0)=0, f(1)=1, f(h) = 1 + f(h-1) + f(h-2).
+  Any AVL of height h must have at least f(h) nodes. Therefore the
+  maximum height that an AVL on N nodes can possibly have is the
+  largest h with f(h) <= N. With N = 1_000_000 we have
+    f(28) = 832039 <= 1_000_000 < 1_346_268 = f(29),
+  so the maximum achievable height is **h = 28**.
+
+  genAVLBST builds, by recursion, an AVL of height exactly 28 with
+  exactly 1_000_000 nodes: at every internal node it picks heights
+  for the two children (differing by at most 1 and with the maximum
+  equal to h-1) and a corresponding split of the remaining (n-1)
+  nodes into the two subtrees, taking advantage of the fact that an
+  AVL of height h can hold any number between f(h) and 2^h - 1
+  nodes. Keys are assigned in an in-order walk so the resulting
+  tree is also a BST whose keys are 0,1,...,999999. The test code
+  verifies isAVL, BST property, the size (1_000_000), and that the
+  height is 28.
+
+  Why this gives the maximal height: f(h) is, by definition, the
+  *minimum* number of nodes needed to reach height h, so the largest
+  h with f(h) <= N is the height of the *thinnest* (i.e. tallest
+  for given N) legal AVL. Any taller tree would need at least
+  f(h+1) > N nodes, which we do not have.
+
+############################################################
+
+Quiz02_05:
+30 points plus up to 20 bonus points
+(isRBT and genRedBlackBST)
+Status: Not chosen (Quiz02_04 was chosen).
+
+############################################################
+
+Quiz02_06: 50 points
+(reroot and insert on DBST)
+Status: Solved with testing
+Strategy:
+  The BST stores int keys; every node holds a parent pointer,
+  left/right children, and the size of its subtree.
+
+  reroot():
+    1. choose a random node by drawing a uniformly random index in
+       [0, root.size - 1] and finding the corresponding in-order
+       node via the size fields (O(h)).
+    2. rotate the chosen node toward the root using right/left tree
+       rotations: if the chosen node is a left child, do a right
+       rotation at its parent; if it is a right child, do a left
+       rotation. Each rotation preserves the BST property and only
+       updates a constant number of parent / child / size fields
+       around the rotation site.
+    3. when the chosen node has no parent it has become the new
+       root; update [root].
+
+  insert(key):
+    standard iterative BST insertion. Walk down following the BST
+    property; if the key is already present, return false; otherwise
+    link a fresh leaf into the parent's correct slot, set its parent
+    pointer and size = 1, and bump the size field of every ancestor
+    on the path to the root.
+
+  The test code verifies (after both inserts and several reroots)
+  the BST property, that parent pointers are consistent, and that
+  every node's stored size is equal to one plus the sizes of its
+  two children.
+
+############################################################

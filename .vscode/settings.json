@@ -3,12 +3,13 @@
     "java.project.sourcePaths": [
         "quizzes/01/MySolution",
         "libraries",
+        "assigns/10/MySolution",
         "assigns/09/MySolution",
         "assigns/08/MySolution",
         "assigns/07/Code",
         "assigns/06/MySolution",
         "assigns/04/Code",
         "assigns/03/Code",
-        "assigns/10/MySolution"
+        "quizzes/02/MySolution"
     ]
 }
