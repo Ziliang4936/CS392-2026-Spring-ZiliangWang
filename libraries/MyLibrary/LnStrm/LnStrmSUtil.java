@@ -1,7 +1,7 @@
 //
-package Library00.LnStrm;
+package MyLibrary.LnStrm;
 //
-import Library00.FnList.*;
+import MyLibrary.FnList.*;
 //
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -98,11 +98,6 @@ public class LnStrmSUtil {
 	      return new LnStcn<T>(); // no satisfying elements found
 	  }
        );
-    }
-//
-    public static<T>
-	FnList<T> toFnList0(LnStrm<T> fxs) {
-	return FnListSUtil.fwork$make((work) -> fxs.foritm0(work));
     }
 //
 } // end of [class LnStrmSUtil{...}]

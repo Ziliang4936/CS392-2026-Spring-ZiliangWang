@@ -1,4 +1,4 @@
-package Library00.MyRefer;
+package MyLibrary.MyRefer;
 
 public class MyRefer<T> {
     T theValue;

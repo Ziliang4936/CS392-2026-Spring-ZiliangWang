@@ -1,4 +1,4 @@
-package Library00.FnTuple;
+package MyLibrary.FnTuple;
 
 public class FnTupl2SUtil {
 //

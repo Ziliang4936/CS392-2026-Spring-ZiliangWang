@@ -1,4 +1,4 @@
-package Library00.MyRefer;
+package MyLibrary.MyRefer;
 
 public class MyReferNullExn extends RuntimeException {
 }

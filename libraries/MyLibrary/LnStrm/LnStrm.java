@@ -1,5 +1,5 @@
 //
-package Library00.LnStrm;
+package MyLibrary.LnStrm;
 //
 import java.util.function.Consumer;
 import java.util.function.Supplier;

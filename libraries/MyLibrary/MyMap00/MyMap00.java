@@ -1,8 +1,8 @@
-package Library00.MyMap00;
+package MyLibrary.MyMap00;
 
-import Library00.FnList.*;
-import Library00.LnStrm.*;
-import Library00.FnTuple.*;
+import MyLibrary.FnList.*;
+import MyLibrary.LnStrm.*;
+import MyLibrary.FnTuple.*;
 
 import java.util.function.BiConsumer;
 
