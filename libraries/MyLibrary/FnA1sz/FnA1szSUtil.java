@@ -164,4 +164,26 @@ public class FnA1szSUtil {
 	return mergeSort_list(xs, (x1, x2) -> x1.compareTo(x2));
     }
 //
+    public static<T> FnA1sz<T>
+	quickSort
+	(FnA1sz<T> xs, ToIntBiFunction<T,T> cmp) {
+	return list$make(FnListSUtil.quickSort(listize(xs), cmp));
+    }
+    public static
+	<T extends Comparable<T>>
+	FnA1sz<T> quickSort(FnA1sz<T> xs) {
+	return quickSort(xs, (x1, x2) -> x1.compareTo(x2));
+    }
+//
+    public static<T> FnA1sz<T>
+	insertSort
+	(FnA1sz<T> xs, ToIntBiFunction<T,T> cmp) {
+	return list$make(FnListSUtil.insertSort(listize(xs), cmp));
+    }
+    public static
+	<T extends Comparable<T>>
+	FnA1sz<T> insertSort(FnA1sz<T> xs) {
+	return insertSort(xs, (x1, x2) -> x1.compareTo(x2));
+    }
+//
 } // end of [public class FnA1szSUtil{...}]

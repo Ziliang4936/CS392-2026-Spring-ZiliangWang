@@ -185,4 +185,33 @@ public class FnListSUtil {
 	}
     }
 //
+    public static<T>
+	void rforitm(FnList<T> xs, Consumer<? super T> work) {
+	reverse(xs).foritm(work);
+    }
+//
+    public static<T>
+	FnList<T>
+	quickSort(FnList<T> xs, ToIntBiFunction<T,T> cmp) {
+	if (nilq(xs)) return xs;
+	FnList<T> tl = xs.tl();
+	if (nilq(tl)) return xs;
+	T pivot = xs.hd();
+	FnList<T> lt = nil();
+	FnList<T> eq = cons(pivot, nil());
+	FnList<T> gt = nil();
+	FnList<T> cur = tl;
+	while (cur.consq()) {
+	    T hd = cur.hd();
+	    int sgn = cmp.applyAsInt(hd, pivot);
+	    if (sgn < 0) lt = cons(hd, lt);
+	    else if (sgn > 0) gt = cons(hd, gt);
+	    else eq = cons(hd, eq);
+	    cur = cur.tl();
+	}
+	lt = quickSort(lt, cmp);
+	gt = quickSort(gt, cmp);
+	return append(lt, append(eq, gt));
+    }
+//
 } // end of [public class FnListSUtil{...}]

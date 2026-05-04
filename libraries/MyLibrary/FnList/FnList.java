@@ -64,4 +64,13 @@ public class FnList<T> {
 	}
     }
 //
+    public void rforitm(Consumer<? super T> work) {
+	FnList<T> rev = FnListSUtil.reverse(this);
+	rev.foritm(work);
+    }
+    public void irforitm(BiConsumer<Integer, ? super T> work) {
+	FnList<T> rev = FnListSUtil.reverse(this);
+	rev.iforitm(work);
+    }
+//
 } // end of [public class FnList<T>{...}]

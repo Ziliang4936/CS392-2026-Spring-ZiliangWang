@@ -1,0 +1,85 @@
+############################################################
+Name: Ziliang Wang
+Usrid: U47271531
+email: wang4936@bu.edu
+############################################################
+Assign01:
+Total: 100/100
+You should not changed the name of TestPayroll class to
+PayrollTest. I did not deduct any points this time, though.
+############################################################
+Assign02:
+Assign02_01: 10/10
+Assign02_02: 10/10
+Assign02_03: ??/20
+Your implementation is not tO(n^2).
+Please fix it and submit for regrading.
+############################################################
+Assign03:
+Assign03_01: 10/10
+Assign03_02: 10/10
+############################################################
+Assign04:
+Assign04_01: 10/10 // Good!
+Assign04_02: 20/20 // Good!
+############################################################
+Quiz01:
+HX-2025-03-16:
+Quiz01_00: 10/10
+Quiz01_01: 20/20
+Quiz01_02: ??/20
+HX-2025-03-16:
+Your solution is disqualified due to using external library:
+>> import java.util.HashMap;
+Quiz01_03: 30/30 // Good work!
+Quiz01_04: ??/40
+HX-2025-03-16:
+Your code does not seem to work correctly. Try to sort the following
+nearly sorted list:
+for (int i = 999999; i >= 2; i-=2) xs = new LnList<>(i, new LnList(i-1, xs));
+Quiz01_05: ??/30
+HX-2025-03-16:
+You misunderstood the question.
+>> // HX-2025-10-15:
+>> // This one is abstract, that is, not implemented
+[someRevStableSort] should always do reverse-stable sorting
+as long as someSort is a sorting function (which can be any
+given sorting function and does not have to be insertSort).
+############################################################
+Quick-fix: HX-2026-04-25: No fixes submitted.
+############################################################
+Assign05:
+Assign05_01: 30/30 // HX-2026-04-25
+############################################################
+Assign06:
+Assign06_01: 30/30 // HX-2026-04-25
+############################################################
+Assign07:
+Assign07_01: HX-2026-04-25: No submission
+Assign07_02: HX-2026-04-25: No submission
+############################################################
+Assign08:
+Assign08_01: HX-2026-04-25: No submission
+Assign08_02: HX-2026-04-25: No submission
+############################################################
+Assign09:
+Assign09_01: 50/50
+############################################################
+Assign10:
+Assign10_01: 50/50
+############################################################
+Assign11:
+Assign11_01: 50/50
+############################################################
+Quiz02:
+Quiz02_00: 20/20 // Good work!
+Quiz02_01: 50/50
+Quiz02_03: 50/50
+Quiz02_04: 10/10 + 10 bonus + 20/20 
+Quiz02_06: 50/50
+Quiz02_02: ??/50 // Your solution uses loops
+Quiz02_05: ??/10 + ??/20 + ?? // HX: Quiz02_04 is chosen
+############################################################
+HX-2026-05-01: Assign07 and Assign08 yet to be graded
+############################################################
+############################################################
